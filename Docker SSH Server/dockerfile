@@ -4,8 +4,23 @@ FROM alpine:trusty
 RUN apk update
 RUN apk add openssh
 
-#Add User
-RUN adduser User
+#Change root Passwort
+RUN echo "root:ichbineinpasswort" | chpasswd
+
+#Add User with Passwort
+RUN adduser user
+RUN echo "user:ichbineinpasswort" | chpasswd
+
+#Add Public Key for user
+COPY identity.pub /home/user/.ssh/autorized_keys
+
+#sshd_config 
+COPY sshd* /etc/ssh/
+
+#Add Hostkey to Container
+COPY ssh_host_rsa_key* /etc/ssh/
+COPY ssh_host_ecdsa_key* /etc/ssh/
+COPY ssh_host_ed25519_key* /etc/ssh/
 
 
 
