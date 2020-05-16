@@ -14,14 +14,19 @@ RUN echo "user:ichbineinpasswort" | chpasswd
 #Add Public Key for user
 COPY identity.pub /home/user/.ssh/autorized_keys
 
+#A-----------------------------------------
 #sshd_config 
 COPY sshd* /etc/ssh/
 
 #Add Hostkey to Container
-COPY ssh_host_rsa_key* /etc/ssh/
-COPY ssh_host_ecdsa_key* /etc/ssh/
-COPY ssh_host_ed25519_key* /etc/ssh/
+COPY hostkey/ssh_host_rsa_key /etc/ssh/
+COPY hostkey/ssh_host_rsa_key.pub /etc/ssh/
+COPY hostkey/ssh_host_ecdsa_key* /etc/ssh/
+COPY hostkey/ssh_host_ed25519_key* /etc/ssh/
+#------------------------------------------
 
+#B-----------------------------------------
+#add whole 
 
 
 
