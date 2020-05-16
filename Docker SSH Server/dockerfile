@@ -1,0 +1,19 @@
+FROM alpine:trusty
+
+#Update and install openssh
+RUN apk update
+RUN apk add openssh
+
+#Add User
+RUN adduser User
+
+
+
+
+
+
+
+
+
+
+EXPOSE 22
