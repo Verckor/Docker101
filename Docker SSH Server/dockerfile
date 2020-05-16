@@ -5,19 +5,19 @@ RUN apk update
 RUN apk add openssh
 
 #Change root Passwort
-RUN echo "root:ichbineinpasswort" | chpasswd
+RUN echo "root:|ichbineinpasswort|" | chpasswd
 
 #Add User with Passwort
 RUN adduser user
-RUN echo "user:ichbineinpasswort" | chpasswd
+RUN echo "user:|ichbineinpasswort|" | chpasswd
 
 #Add Public Key for user
 COPY identity.pub /home/user/.ssh/autorized_keys
 
-#A-----------------------------------------
 #sshd_config 
 COPY sshd* /etc/ssh/
 
+#A-----------------------------------------
 #Add Hostkey to Container
 COPY hostkey/ssh_host_rsa_key /etc/ssh/
 COPY hostkey/ssh_host_rsa_key.pub /etc/ssh/
@@ -26,14 +26,12 @@ COPY hostkey/ssh_host_ed25519_key* /etc/ssh/
 #------------------------------------------
 
 #B-----------------------------------------
-#add whole 
+#add all
+COPY hostkey/* /etc/ssh/
+#------------------------------------------
 
+#Restart openssh
+RUN service openssh restart
 
-
-
-
-
-
-
-
+#
 EXPOSE 22

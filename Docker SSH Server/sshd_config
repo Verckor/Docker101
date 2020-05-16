@@ -33,7 +33,7 @@ PermitRootLogin no
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
-AllowUsers sshlogin syncprogramming syncuni
+AllowUsers user
 #PubkeyAuthentication yes
 
 # Expect .ssh/authorized_keys2 to be disregarded by default in future.
@@ -87,7 +87,7 @@ UsePAM yes
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
 #GatewayPorts no
-X11Forwarding yes
+#X11Forwarding yes
 #X11DisplayOffset 10
 #X11UseLocalhost yes
 #PermitTTY yes
