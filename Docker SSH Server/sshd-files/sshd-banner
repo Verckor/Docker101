@@ -33,7 +33,7 @@ PermitRootLogin no
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
-AllowUsers user
+AllowUsers sshlogin syncprogramming syncuni
 #PubkeyAuthentication yes
 
 # Expect .ssh/authorized_keys2 to be disregarded by default in future.
@@ -83,11 +83,10 @@ ChallengeResponseAuthentication no
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
 
-#Use for tunneling
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
 #GatewayPorts no
-#X11Forwarding yes
+X11Forwarding yes
 #X11DisplayOffset 10
 #X11UseLocalhost yes
 #PermitTTY yes
@@ -122,4 +121,5 @@ Subsystem	sftp	/usr/lib/openssh/sftp-server
 #	AllowTcpForwarding no
 #	PermitTTY no
 #	ForceCommand cvs server
+PasswordAuthentication yes
 

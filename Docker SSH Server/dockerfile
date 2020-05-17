@@ -1,37 +1,38 @@
-FROM alpine:trusty
+FROM alpine:latest
 
 #Update and install openssh
 RUN apk update
 RUN apk add openssh
 
-#Change root Passwort
+#Change root Passwort or remove
 RUN echo "root:|ichbineinpasswort|" | chpasswd
+#RUN passwd -d root
 
-#Add User with Passwort
-RUN adduser user
+#Add User
+RUN adduser user -D
 RUN echo "user:|ichbineinpasswort|" | chpasswd
-
 #Add Public Key for user
-COPY identity.pub /home/user/.ssh/autorized_keys
+COPY identitys/identity.pub /home/user/.ssh/autorized_keys
+
+#Add second User 
+#RUN adduser user2 -D
+#RUN echo "user:|ichbineinpasswort|" | chpasswd
+#Add Public Key for second user
+#COPY identitys/identity2.pub /home/user2/.ssh/autorized_keys
+
 
 #sshd_config 
-COPY sshd* /etc/ssh/
+COPY sshd-files/* /etc/ssh/
 
-#A-----------------------------------------
-#Add Hostkey to Container
-COPY hostkey/ssh_host_rsa_key /etc/ssh/
-COPY hostkey/ssh_host_rsa_key.pub /etc/ssh/
-COPY hostkey/ssh_host_ecdsa_key* /etc/ssh/
-COPY hostkey/ssh_host_ed25519_key* /etc/ssh/
-#------------------------------------------
-
-#B-----------------------------------------
-#add all
+#Copy Host-Keys
 COPY hostkey/* /etc/ssh/
-#------------------------------------------
 
-#Restart openssh
-RUN service openssh restart
+#Run openssh
+#ENTRYPOINT ["/entrypoint.sh"]
+#COPY entrypoint.sh /
 
-#
+#Start openssh server
+CMD ["/usr/sbin/sshd", "-D"]
+
+#Open Ports
 EXPOSE 22
