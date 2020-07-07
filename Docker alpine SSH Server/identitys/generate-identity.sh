@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ssh-keygen -t dsa -f identity -N ''
+ssh-keygen -t ed25519 -f identity -N ''
 
 
 

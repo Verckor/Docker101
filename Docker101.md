@@ -14,7 +14,7 @@ Bei Docker handelt es sich um eine Open Source Software zu  Anwendungs Isolation
 
 ## Sicherheitsaspekte
 
-Bei Docker handelt es sich um eine Open Source Software zu  Anwendungs Isolation mit Containervirtualisierung. Die eingesetzten Docker Container basieren auf Linux weshalb ein Linux Kernel zum ausführen nötig ist. Mithilfe des Hyper-V Standarts oder VirtualBox kann es auch auf anderen Systemen zum laufen gebracht werden.
+
 
 
 
