@@ -1,0 +1,43 @@
+FROM debian:latest
+
+#Update and install openssh-server
+RUN apt-get update
+RUN apt-get install -y openssh-server
+
+#Change root Passwort or remove
+RUN echo "root:|ichbineinpasswort|" | chpasswd
+#RUN passwd -d root
+
+#Add User
+RUN useradd user 
+RUN echo "user:|ichbineinpasswort|" | chpasswd
+#Add Public Key for user
+COPY identitys/identity.pub /home/user/.ssh/authorized_keys
+RUN chown -R user:user /home/user/.ssh
+RUN chmod 700 /home/user/.ssh
+RUN chmod 600 /home/user/.ssh/authorized_keys
+
+#Add second User 
+#RUN useradd user2 --disabled-password
+#RUN echo "user:|ichbineinpasswort|" | chpasswd
+#Add Public Key for second user
+#COPY identitys/identity2.pub /home/user2/.ssh/authorized_keys
+#RUN chown -R user2:user2 /home/user2/.ssh
+#RUN chmod 700 /home/user/.ssh
+#RUN chmod 600 /home/user/.ssh/authorized_keys
+
+#ssh_config ssh-banner ssh not sshd in alpine
+COPY ssh-files/s* /etc/ssh/
+
+#Copy Host-Keys
+COPY hostkey/* /etc/ssh/
+
+RUN mkdir -p /var/run/sshd
+
+#Open Ports
+EXPOSE 22
+
+#Start openssh server
+CMD ["/usr/sbin/sshd", "-D"]
+
+
