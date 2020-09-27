@@ -26,11 +26,12 @@ RUN chmod 600 /home/user/.ssh/authorized_keys
 #RUN chmod 700 /home/user/.ssh
 #RUN chmod 600 /home/user/.ssh/authorized_keys
 
-#ssh_config ssh-banner ssh not sshd in alpine
-COPY ssh-files/s* /etc/ssh/
-
 #Copy Host-Keys
 COPY hostkey/* /etc/ssh/
+RUN chmod 700 /etc/ssh/*
+
+#ssh_config ssh-banner ssh not sshd in alpine
+COPY ssh-files/s* /etc/ssh/
 
 RUN mkdir -p /var/run/sshd
 

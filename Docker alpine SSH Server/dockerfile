@@ -15,7 +15,7 @@ RUN echo "user:|ichbineinpasswort|" | chpasswd
 COPY identitys/identity.pub /home/user/.ssh/authorized_keys
 RUN chown -R user:user /home/user/.ssh
 RUN chmod 700 /home/user/.ssh
-#RUN chmod 600 /home/user/.ssh/authorized_keys
+RUN chmod 644 /home/user/.ssh/authorized_keys
 
 #Add second User 
 #RUN adduser user2 -D
@@ -23,14 +23,15 @@ RUN chmod 700 /home/user/.ssh
 #Add Public Key for second user
 #COPY identitys/identity2.pub /home/user2/.ssh/authorized_keys
 #RUN chown -R user2:user2 /home/user2/.ssh
-#RUN chmod 700 /home/user/.ssh
+#RUN chmod 700 /home/user2/.ssh
 #RUN chmod 600 /home/user/.ssh/authorized_keys
-
-#ssh_config ssh-banner ssh not sshd in alpine
-COPY ssh-files/s* /etc/ssh/
 
 #Copy Host-Keys
 COPY hostkey/* /etc/ssh/
+RUN chmod 700 /etc/ssh/*
+
+#ssh_config ssh-banner ssh not sshd in alpine
+COPY ssh-files/s* /etc/ssh/
 
 #Open Ports
 EXPOSE 22

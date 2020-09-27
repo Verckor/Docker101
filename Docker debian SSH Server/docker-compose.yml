@@ -1,0 +1,6 @@
+version: '2'
+services:
+  debian-openssh-server:
+    build: .
+    ports: 
+     - '2222:22'

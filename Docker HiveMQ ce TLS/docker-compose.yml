@@ -1,0 +1,6 @@
+version: '2'
+services:
+  hive-mq-ce:
+    build: .
+    ports: 
+     - '8883:8883'
