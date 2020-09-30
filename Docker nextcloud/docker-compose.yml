@@ -15,11 +15,14 @@ services:
       - postgres_password
       - postgres_user
 
-  app:
+  nextcloud:
     image: nextcloud
     restart: always
     ports:
       - 8080:80
+    networks:
+      - nginx-proxy
+      - default
     volumes:
       - nextcloud:/var/www/html
     environment:
