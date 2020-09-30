@@ -48,9 +48,6 @@ volumes:
   db:
   nextcloud:
 
-networks:
-      - nginx-proxy
-      - default
 
 secrets:
   nextcloud_admin_password:
