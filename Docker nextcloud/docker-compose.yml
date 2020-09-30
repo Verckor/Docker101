@@ -48,6 +48,10 @@ volumes:
   db:
   nextcloud:
 
+networks:
+      - nginx-proxy
+      - default
+
 secrets:
   nextcloud_admin_password:
     file: ./nextcloud_admin_password.txt # put admin password to this file

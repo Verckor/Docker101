@@ -2,4 +2,8 @@
 
 Docker Basics in a nutshell
 
-SSH-Server: !!! change identity !!!
+Change Key Files and passworts
+
+
+
+[Docker compose](https://docs.docker.com/compose/install/)
