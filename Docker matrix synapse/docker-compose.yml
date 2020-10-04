@@ -1,0 +1,20 @@
+version: "3.3"
+
+services:
+    sybapse:
+        image: "matrixdotorg/synapse:latest"
+        container_name: "synapse"
+        volumes:
+            - "./data:/data"
+        environment:
+            VIRTUAL_HOST: "matrix.example.com"
+            VIRTUAL_PORT: 8008
+            LETSENCRYPT_HOST: "matrix.example.com"
+            LETSENCRYPT_EMAIL: "info@example.com"
+            SYNAPSE_SERVER_NAME: "example.com"
+            SYNAPSE_REPORT_STATS: "yes"
+
+networks:
+    default:
+        external:
+            name: nginx-proxy

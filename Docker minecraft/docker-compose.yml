@@ -1,0 +1,44 @@
+
+version: '3.8'
+
+services:
+  minecraft:
+    image: itzg/minecraft-server
+    ports:
+      - "25565:25565"
+    volumes:
+      - "./data:/data"
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      EULA: "TRUE"
+      Version: "1.16.3"
+      Mode: "adventure" # creative, survival, adventure, spectator 
+      PVP: "true"
+      ALLOW_FLIGHT: "false"
+      MAX_PLAYER: "20"
+      ALLOW_NETHER: "true"
+      ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
+      ENABLE_COMMAND_BLOCK: "true"
+      FORCE_GAMEMODE: "true"
+      GENERATE_STRUCTURES: "true"
+      HARDCORE: "false"
+      SPAWN_ANIMALS: "true"
+      SPAWN_MONSTERS: "true"
+      SPAWN_NPCS: "true"
+      SPAWN_PROTECTION: "0"
+      VIEW_DISTANCE: "10"
+      #SEED=1785852800490497919 ...
+      SNOOPER_ENABLED: "false"
+      ENABLE_AUTOPAUSE: "true"
+      AUTOPAUSE_TIMEOUT_EST: "1200"
+      AUTOPAUSE_TIMEOUT_INIT: "600"
+      AUTOPAUSE_TIMEOUT_KN: "120
+      AUTOPAUSE_PERIOD: "10"
+      OVERRIDE_SERVER_PROPERTIES: "TRUE"
+      MAX_TICK_TIME: "60000"
+      WHITELIST: "user1,user2"
+      OPS: "user1,user2"
+      ICON: "http://www.image.de"
+      MOTD: "My Server"
+    restart: always
+

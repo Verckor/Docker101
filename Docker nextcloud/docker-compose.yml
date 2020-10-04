@@ -4,6 +4,8 @@ services:
   db:
     image: postgres
     restart: always
+    expose:
+      - 5433
     volumes:
       - db:/var/lib/postgresql/data
     environment:
@@ -52,13 +54,13 @@ networks:
 
 secrets:
   nextcloud_admin_password:
-    file: ./nextcloud_admin_password.txt # put admin password to this file
+    file: ./nextcloud_admin_password # put admin password to this file
   nextcloud_admin_user:
-    file: ./nextcloud_admin_user.txt # put admin username to this file
+    file: ./nextcloud_admin_user # put admin username to this file
   postgres_db:
-    file: ./postgres_db.txt # put postgresql db name to this file
+    file: ./postgres_db # put postgresql db name to this file
   postgres_password:
-    file: ./postgres_password.txt # put postgresql password to this file
+    file: ./postgres_password # put postgresql password to this file
   postgres_user:
-    file: ./postgres_user.txt # put postgresql username to this file
+    file: ./postgres_user # put postgresql username to this file
 
