@@ -4,8 +4,8 @@ services:
   db:
     image: postgres
     restart: always
-    expose:
-      - 5433
+#    expose:
+#      - 5433
     volumes:
       - db:/var/lib/postgresql/data
     environment:
@@ -24,6 +24,7 @@ services:
       - 80
     volumes:
       - nextcloud:/var/www/html
+      - ./maxfilesize:/usr/local/etc/php/php.ini
     environment:
       - POSTGRES_HOST=db
       - POSTGRES_DB_FILE=/run/secrets/postgres_db
@@ -31,9 +32,11 @@ services:
       - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
       - NEXTCLOUD_ADMIN_PASSWORD_FILE=/run/secrets/nextcloud_admin_password
       - NEXTCLOUD_ADMIN_USER_FILE=/run/secrets/nextcloud_admin_user
-      - VIRTUAL_HOST=example.com
-      - LETSENCRYPT_HOST=example.com
-      - LETSENCRYPT_EMAIL=info@example.com
+      - VIRTUAL_HOST=cloud.zwickel.net
+      - LETSENCRYPT_HOST=cloud.zwickel.net
+      - LETSENCRYPT_EMAIL=info@zwickel.net
+      - TRUSTED_PROXIES=['127.0.0.1']
+      - NEXTCLOUD_TRUSTED_DOMAINS=cloud.zwickel.net
     depends_on:
       - db
     secrets:
@@ -63,4 +66,5 @@ secrets:
     file: ./postgres_password # put postgresql password to this file
   postgres_user:
     file: ./postgres_user # put postgresql username to this file
+
 
