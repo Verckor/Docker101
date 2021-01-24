@@ -1,0 +1,5 @@
+1. 
+npm install - generate a package-lock.json file which will be copied to the Docker image
+
+2:
+docker-compose up 
